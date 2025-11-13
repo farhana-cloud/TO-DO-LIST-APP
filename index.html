@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App - Learning Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+        }
+        .progress-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .progress-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#4caf50 80%, #e0e0e0 80%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .task-section {
+            margin-bottom: 40px;
+        }
+        .task-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        .task-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .task-content {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+        .task-content i {
+            margin-right: 15px;
+            color: #667eea;
+        }
+        .task-text {
+            flex-grow: 1;
+        }
+        .task-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .add-task-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .add-task-btn:hover {
+            background-color: #218838;
+        }
+        .calendar-section {
+            text-align: center;
+        }
+        .calendar-section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+        .calendar-day {
+            width: 35px;
+            height: 35px;
+            line-height: 35px;
+            border-radius: 50%;
+            background-color: #e9ecef;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .calendar-day:hover {
+            background-color: #d0d0d0;
+        }
+        .calendar-day.active {
+            background-color: #667eea;
+            color: white;
+        }
+        .task-input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .task-icon-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ToDo App - Learning Platform</h1>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h2>My Progress</h2>
+            <div class="progress-circle" id="progressCircle">0%</div>
+            <p>Complete your tasks to see progress!</p>
+        </div>
+
+        <!-- Task Section -->
+        <div class="task-section">
+            <h2>Task List</h2>
+            <button class="add-task-btn" onclick="showAddTaskForm()"><i class="fas fa-plus"></i> Add New Task</button>
+            <div id="taskList">
+                <!-- Tasks will be added here dynamically -->
+            </div>
+        </div>
+
+        <!-- Calendar Section -->
+        <div class="calendar-section">
+            <h2>Calendar</h2>
+            <div class="calendar">
+                <div class="calendar-day" onclick="selectDay(this)">1</div>
+                <div class="calendar-day" onclick="selectDay(this)">2</div>
+                <div class="calendar-day" onclick="selectDay(this)">3</div>
+                <div class="calendar-day" onclick="selectDay(this)">4</div>
+                <div class="calendar-day" onclick="selectDay(this)">5</div>
+                <div class="calendar-day" onclick="selectDay(this)">6</div>
+                <div class="calendar-day" onclick="selectDay(this)">7</div>
+                <div class="calendar-day" onclick="selectDay(this)">8</div>
+                <div class="calendar-day" onclick="selectDay(this)">9</div>
+                <div class="calendar-day" onclick="selectDay(this)">10</div>
+                <div class="calendar-day" onclick="selectDay(this)">11</div>
+                <div class="calendar-day" onclick="selectDay(this)">12</div>
+                <div class="calendar-day" onclick="selectDay(this)">13</div>
+                <div class="calendar-day" onclick="selectDay(this)">14</div>
+                <div class="calendar-day" onclick="selectDay(this)">15</div>
+                <div class="calendar-day" onclick="selectDay(this)">16</div>
+                <div class="calendar-day" onclick="selectDay(this)">17</div>
+                <div class="calendar-day" onclick="selectDay(this)">18</div>
+                <div class="calendar-day" onclick="selectDay(this)">19</div>
+                <div class="calendar-day" onclick="selectDay(this)">20</div>
+                <div class="calendar-day" onclick="selectDay(this)">21</div>
+                <div class="calendar-day" onclick="selectDay(this)">22</div>
+                <div class="calendar-day" onclick="selectDay(this)">23</div>
+                <div class="calendar-day" onclick="selectDay(this)">24</div>
+                <div class="calendar-day" onclick="selectDay(this)">25</div>
+                <div class="calendar-day" onclick="selectDay(this)">26</div>
+                <div class="calendar-day" onclick="selectDay(this)">27</div>
+                <div class="calendar-day" onclick="selectDay(this)">28</div>
+                <div class="calendar-day" onclick="selectDay(this)">29</div>
+                <div class="calendar-day" onclick="selectDay(this)">30</div>
+                <div class="calendar-day" onclick="selectDay(this)">31</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let tasks = [];
+        let completedTasks = 0;
+
+        function showAddTaskForm() {
+            const taskText = prompt('Enter task name:');
+            if (taskText) {
+                const icon = prompt('Choose an icon (e.g., book-open, film, broom, spa, edit, shopping-cart):') || 'tasks';
+                addTask(taskText, icon);
+            }
+        }
+
+        function addTask(text, icon) {
+            const taskId = Date.now();
+            const task = { id: taskId, text: text, icon: icon, completed: false };
+            tasks.push(task);
+            renderTasks();
+        }
+
+        function deleteTask(id) {
+            tasks = tasks.filter(task => task.id !== id);
+            renderTasks();
+        }
+
+        function toggleTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                completedTasks = tasks.filter(t => t.completed).length;
+                updateProgress();
+                renderTasks();
+            }
+        }
+
+        function renderTasks() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = '';
+            tasks.forEach(task => {
+                const taskItem = document.createElement('div');
+                taskItem.className = 'task-item';
+                taskItem.innerHTML = `
+                    <div class="task-content" onclick="toggleTask(${task.id})">
+                        <i class="fas fa-${task.icon}"></i>
+                        <span class="task-text" style="${task.completed ? 'text-decoration: line-through; color: #6c757d;' : ''}">${task.text}</span>
+                    </div>
+                    <div class="task-actions">
+                        <button class="delete-btn" onclick="deleteTask(${task.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                taskList.appendChild(taskItem);
+            });
+        }
+
+        function selectDay(element) {
+            const days = document.querySelectorAll('.calendar-day');
+            days.forEach(day => day.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function updateProgress() {
+            const progress = tasks.length > 0 ? Math.round((completedTasks / tasks.length) * 100) : 0;
+            document.getElementById('progressCircle').textContent = progress + '%';
+            document.getElementById('progressCircle').style.background = `conic-gradient(#4caf50 ${progress}%, #e0e0e0 ${progress}%)`;
+        }
+    </script>
+</body>
+</html>
